@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
-using LumenWorks.Framework.IO.Csv;
 using System.Data;
 using Microsoft.VisualBasic.FileIO;
 using ET = ExcelTransfomation;
@@ -29,45 +27,12 @@ namespace ReadDataFromCSVFile
 
             //Console.WriteLine("Rows count:" + csvData.Rows.Count);
 
-            ET.ExcelRead.ReadFile(excel_file_path);
+            //ET.ExcelRead.ReadFile(excel_file_path);
 
             Console.WriteLine("Program End");
 
             Console.ReadLine();
 
-        }
-
-        public static void ReadCsv()
-        {
-            // open the file "data.csv" which is a CSV file with headers
-            using (CsvReader csv = new CsvReader(
-                   new StreamReader("data.csv"), true))
-            {
-                // missing fields will not throw an exception,
-                // but will instead be treated as if there was a null value
-                csv.DefaultParseErrorAction = ParseErrorAction.RaiseEvent;
-
-                csv.ParseError += new ParseErrorEventHandler(csv_ParseError);
-                int fieldCount = csv.FieldCount;
-
-                string[] headers = csv.GetFieldHeaders();
-                while (csv.ReadNextRecord())
-                {
-                    for (int i = 0; i < fieldCount; i++)
-                        Console.Write(string.Format("{0} = {1};",
-                                      headers[i], csv[i]));
-                    Console.WriteLine();
-                }
-            }
-        }
-        public static void csv_ParseError(object sender, ParseErrorEventArgs e)
-        {
-            // if the error is that a field is missing, then skip to next line
-            if (e.Error is MissingFieldCsvException)
-            {
-                Console.Write("--MISSING FIELD ERROR OCCURRED");
-                e.Action = ParseErrorAction.AdvanceToNextLine;
-            }
         }
 
         private static DataTable GetDataTabletFromCSVFile(string csv_file_path)
