@@ -7,6 +7,7 @@ using System.IO;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
+using System.Diagnostics;
 
 namespace Test
 {
@@ -47,7 +48,7 @@ namespace Test
                 }
             }
         }
-        private static void WriteExcelFile01(string filename)
+        private static void WriteExcelFile01(string filename, string[] ExlKey, string[] ExlValue)
         {
             Console.WriteLine("************WriteExcelFile{0} Content***************", filename);
             var ext = Path.GetExtension(filename).ToLower();

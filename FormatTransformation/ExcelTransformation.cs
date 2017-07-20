@@ -8,6 +8,7 @@ using System.Data;
 
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using Microsoft.VisualBasic.FileIO;
 
 namespace ExcelTransfomation
 {
@@ -67,6 +68,80 @@ namespace ExcelTransfomation
 
             }
         }
+
+        public static DataTable GetDataTabletFromCSVFile(string csv_file_path)
+
+        {
+            Console.WriteLine(csv_file_path);
+
+            DataTable csvData = new DataTable();
+
+            try
+
+            {
+
+                using (TextFieldParser csvReader = new TextFieldParser(csv_file_path))
+
+                {
+                    csvReader.ReadLine();
+
+                    csvReader.SetDelimiters(new string[] { "," });
+
+                    csvReader.HasFieldsEnclosedInQuotes = true;
+
+                    string[] colFields = csvReader.ReadFields();
+
+                    foreach (string column in colFields)
+
+                    {
+                        Console.WriteLine(column);
+
+                        DataColumn datecolumn = new DataColumn(column);
+
+                        datecolumn.AllowDBNull = true;
+
+                        csvData.Columns.Add(datecolumn);
+
+                    }
+
+                    while (!csvReader.EndOfData)
+
+                    {
+
+                        string[] fieldData = csvReader.ReadFields();
+
+                        //Making empty value as null
+
+                        for (int i = 0; i < fieldData.Length; i++)
+
+                        {
+
+                            if (fieldData[i] == "")
+
+                            {
+
+                                fieldData[i] = null;
+
+                            }
+
+                        }
+
+                        csvData.Rows.Add(fieldData);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return csvData;
+
+        }
+
     }
 
     class ExcelWrite {
@@ -81,20 +156,7 @@ namespace ExcelTransfomation
         {
             DataTable dt = new DataTable();
 
-            var excel = new LinqToExcel.ExcelQueryFactory(excel_file_path);
-
-            var query =
-                from row in excel.Worksheet("Products(2)")
-                let item = new
-                {
-                    name = row["!MANUFACTURER"].Cast<string>(),
-                    //Name = row["Name"].Cast<string>(),
-                    //SeName = row["SeName"].Cast<string>(),
-                }
-                //where item.id == "28"
-                select item;
-
-            var excel_mf = new LinqToExcel.ExcelQueryFactory(@"C:\Users\justi\Downloads\manufacturers");
+            var excel_mf = new LinqToExcel.ExcelQueryFactory(@"F:\Project\manufacturers.xlsx");
 
             var pricebook_manufacturer =
                 from row in excel_mf.Worksheet("Manufacturer")
@@ -115,13 +177,34 @@ namespace ExcelTransfomation
                 d.Add(manufacturer.name, new Manufacturer(manufacturer.id,manufacturer.name,manufacturer.sename));
             }
 
-            foreach (var item in query)
-            {
-                if (!d.ContainsKey(item.name)) {
+            DataTable csvData = ExcelRead.GetDataTabletFromCSVFile(excel_file_path);
 
-                    d.Add(item.name, new Manufacturer(Convert.ToString(d.Count+2), item.name, null));
+
+            Console.WriteLine("Rows count:" + csvData.Rows.Count);
+            /*
+            var excel = new LinqToExcel.ExcelQueryFactory(@"‪F:\Project\PRODUCTS_Test.xlsx");
+           
+            var pricebook_product =
+                from row in excel.Worksheet("PRODUCTS_Test")
+                let product = new
+                {
+                    name = row["!MANUFACTURER"].Cast<string>(),
+                    //Name = row["Name"].Cast<string>(),
+                    //SeName = row["SeName"].Cast<string>(),
+                }
+                //where item.id == "28"
+                select product;
+           */
+            DataColumn dc = csvData.Columns["!MANUFACTURER"];
+
+            foreach (DataRow r in csvData.Rows)
+            {
+                string item = r[dc].ToString();
+                if (!d.ContainsKey(item)) {
+
+                    d.Add(item, new Manufacturer(Convert.ToString(d.Count+2), item, null));
                     string categoryinfo = "Add new name:{0}";
-                    Console.WriteLine(string.Format(categoryinfo, item.name));
+                    Console.WriteLine(string.Format(categoryinfo, item));
 
                 }
 
@@ -132,37 +215,6 @@ namespace ExcelTransfomation
                 dt.Columns.Add(new DataColumn(s, typeof(string)));
 
             }
-            /*
-            using (FileStream stream = new FileStream(excel_file_path, FileMode.Open, FileAccess.Read))
-            {
-                IWorkbook wb = new XSSFWorkbook(stream);
-                ISheet sheet = wb.GetSheet(sheet_name);
-                string holder;
-                int i = 0;
-                do
-                {
-                    DataRow dr = dt.NewRow();
-                    IRow row = sheet.GetRow(i);
-                    try
-                    {
-                        holder = row.GetCell(0, MissingCellPolicy.CREATE_NULL_AS_BLANK).ToString();
-                    }
-                    catch (Exception)
-                    {
-                        break;
-                    }
-
-                    string city = holder.Substring(0, holder.IndexOf(','));
-                    string state = holder.Substring(holder.IndexOf(',') + 2, 2);
-                    string zip = holder.Substring(holder.IndexOf(',') + 5, 5);
-                    dr[0] = city;
-                    dr[1] = state;
-                    dr[2] = zip;
-                    dt.Rows.Add(dr);
-                    i++;
-                } while (!String.IsNullOrEmpty(holder));
-            }
-            */
             // write data into Datatable
 
             foreach (var item in d) {
@@ -171,9 +223,8 @@ namespace ExcelTransfomation
                 dr["Id"] = item.Value.Id;
                 dr["Name"] = item.Key;
                 dr["SeName"] = item.Value.Sename;
+                dt.Rows.Add(dr);
                 
-
-
             }
 
             using (FileStream stream = new FileStream(destination_file_path, FileMode.Create, FileAccess.Write))
@@ -181,12 +232,19 @@ namespace ExcelTransfomation
                 IWorkbook wb = new XSSFWorkbook();
                 ISheet sheet = wb.CreateSheet(sheet_name);
                 ICreationHelper cH = wb.GetCreationHelper();
+
+                IRow header = sheet.CreateRow(0);
+                for (int j = 0; j < dt.Columns.Count; j++) {
+                    ICell cell = header.CreateCell(j);
+                    cell.SetCellValue(cH.CreateRichTextString(dt.Columns[j].ColumnName.ToString()));
+                }
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    IRow row = sheet.CreateRow(i);
+                    IRow row = sheet.CreateRow(i+1);
                     for (int j = 0; j < dt.Columns.Count; j++)
                     {
                         ICell cell = row.CreateCell(j);
+                        Console.WriteLine(cH.CreateRichTextString(dt.Rows[i].ItemArray[j].ToString()));
                         cell.SetCellValue(cH.CreateRichTextString(dt.Rows[i].ItemArray[j].ToString()));
                     }
                 }
@@ -196,4 +254,6 @@ namespace ExcelTransfomation
 
 
     }
+
+
 }
