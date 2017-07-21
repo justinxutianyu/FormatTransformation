@@ -25,6 +25,8 @@ namespace ReadDataFromCSVFile
 
             string dest_file_path = @"C:\Users\justi\Downloads\test.xlsx";
 
+            string sheet_name = @"!MANUFACTURER";
+
             string[] attr = { "Id","Name", "Description",   "CategoryTemplateId",
                 "MetaKeywords", "MetaDescription",  "MetaTitle", "SeName", "ParentCategoryId",
                 "Picture", "PageSize",  "AllowCustomersToSelectPageSize",   "PageSizeOptions",
@@ -39,7 +41,7 @@ namespace ReadDataFromCSVFile
 
             //ET.ExcelRead.ReadFile(excel_file_path);
 
-            ET.ExcelWrite.Transform(excel_file_path,dest_file_path, attr, @"PRODUCTS(2)");
+            ET.ExcelWrite.Transform(excel_file_path,dest_file_path, attr, sheet_name);
 
             Console.WriteLine("Program End");
 

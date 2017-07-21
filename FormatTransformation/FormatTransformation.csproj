@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Format.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="ExcelTransformation.cs" />
     <Compile Include="Program.cs" />
