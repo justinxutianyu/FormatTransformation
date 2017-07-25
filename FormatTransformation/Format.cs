@@ -33,7 +33,7 @@ namespace Format
         private string published;
         private string displayOrder;
 
-        public string Id { get => Id; set => Id = value; }
+        public string Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public string Description { get => description; set => description = value; }
         public string ManufacturerTemplateId { get => manufacturerTemplateId; set => manufacturerTemplateId = value; }
@@ -44,7 +44,7 @@ namespace Format
         public string Picture { get => picture; set => picture = value; }
         public string PageSize { get => pageSize; set => pageSize = value; }
         public string AllowCustomersToSelectPageSize { get => allowCustomersToSelectPageSize; set => allowCustomersToSelectPageSize = value; }
-        public string PageSizeOptions { get => PageSizeOptions; set => PageSizeOptions = value; }
+        public string PageSizeOptions { get => pageSizeOptions; set => pageSizeOptions = value; }
         public string PriceRanges { get => priceRanges; set => priceRanges = value; }
         public string Published { get => published; set => published = value; }
         public string DisplayOrder { get => displayOrder; set => displayOrder = value; }
@@ -219,7 +219,163 @@ namespace Format
         private string picture2;
         private string picture3;
 
+        public string ProductType { get => productType; set => productType = value; }
+        public string ParentGroupedProductId { get => parentGroupedProductId; set => parentGroupedProductId = value; }
+        public string VisibleIndividually { get => visibleIndividually; set => visibleIndividually = value; }
+        public string Name { get => name; set => name = value; }
+        public string ShortDescription { get => shortDescription; set => shortDescription = value; }
+        public string FullDescription { get => fullDescription; set => fullDescription = value; }
+        public string Vendor { get => vendor; set => vendor = value; }
+        public string ProductTemplate { get => productTemplate; set => productTemplate = value; }
+        public string ShowOnHomePage { get => showOnHomePage; set => showOnHomePage = value; }
+        public string MetaKeywords { get => metaKeywords; set => metaKeywords = value; }
+        public string MetaDescription { get => metaDescription; set => metaDescription = value; }
+        public string MetaTitle { get => metaTitle; set => metaTitle = value; }
+        public string SeName { get => seName; set => seName = value; }
+        public string AllowCustomerReviews { get => allowCustomerReviews; set => allowCustomerReviews = value; }
+        public string Published { get => published; set => published = value; }
+        public string SKU { get => sKU; set => sKU = value; }
+        public string ManufacturerPartNumber { get => manufacturerPartNumber; set => manufacturerPartNumber = value; }
+        public string Gtin { get => gtin; set => gtin = value; }
+        public string IsGiftCard { get => isGiftCard; set => isGiftCard = value; }
+        public string GiftCardType { get => giftCardType; set => giftCardType = value; }
+        public string OverriddenGiftCardAmount { get => overriddenGiftCardAmount; set => overriddenGiftCardAmount = value; }
+        public string RequireOtherProducts { get => requireOtherProducts; set => requireOtherProducts = value; }
+        public string RequiredProductIds { get => requiredProductIds; set => requiredProductIds = value; }
+        public string AutomaticallyAddRequiredProducts { get => automaticallyAddRequiredProducts; set => automaticallyAddRequiredProducts = value; }
+        public string IsDownload { get => isDownload; set => isDownload = value; }
+        public string DownloadId { get => downloadId; set => downloadId = value; }
+        public string UnlimitedDownloads { get => unlimitedDownloads; set => unlimitedDownloads = value; }
+        public string MaxNumberOfDownloads { get => maxNumberOfDownloads; set => maxNumberOfDownloads = value; }
+        public string DownloadActivationType { get => downloadActivationType; set => downloadActivationType = value; }
+        public string HasSampleDownload { get => hasSampleDownload; set => hasSampleDownload = value; }
+        public string SampleDownloadId { get => sampleDownloadId; set => sampleDownloadId = value; }
+        public string HasUserAgreement { get => hasUserAgreement; set => hasUserAgreement = value; }
+        public string UserAgreementText { get => userAgreementText; set => userAgreementText = value; }
+        public string IsRecurring { get => isRecurring; set => isRecurring = value; }
+        public string RecurringCycleLength { get => recurringCycleLength; set => recurringCycleLength = value; }
+        public string RecurringCyclePeriod { get => recurringCyclePeriod; set => recurringCyclePeriod = value; }
+        public string RecurringTotalCycles { get => recurringTotalCycles; set => recurringTotalCycles = value; }
+        public string IsRental { get => isRental; set => isRental = value; }
+        public string RentalPriceLength { get => rentalPriceLength; set => rentalPriceLength = value; }
+        public string RentalPricePeriod { get => rentalPricePeriod; set => rentalPricePeriod = value; }
+        public string IsShipEnabled { get => isShipEnabled; set => isShipEnabled = value; }
+        public string ShipSeparately { get => shipSeparately; set => shipSeparately = value; }
+        public string AdditionalShippingCharge { get => additionalShippingCharge; set => additionalShippingCharge = value; }
+        public string DeliveryDate { get => deliveryDate; set => deliveryDate = value; }
+        public string IsTaxExempt { get => isTaxExempt; set => isTaxExempt = value; }
+        public string TaxCategory { get => taxCategory; set => taxCategory = value; }
+        public string IsTelecommunicationsOrBroadcastingOrElectronicServices { get => isTelecommunicationsOrBroadcastingOrElectronicServices; set => isTelecommunicationsOrBroadcastingOrElectronicServices = value; }
+        public string ManageInventoryMethod { get => manageInventoryMethod; set => manageInventoryMethod = value; }
+        public string UseMultipleWarehouses { get => useMultipleWarehouses; set => useMultipleWarehouses = value; }
+        public string WarehouseId { get => warehouseId; set => warehouseId = value; }
+        public string StockQuantity { get => stockQuantity; set => stockQuantity = value; }
+        public string DisplayStockAvailability { get => displayStockAvailability; set => displayStockAvailability = value; }
+        public string DisplayStockQuantity { get => displayStockQuantity; set => displayStockQuantity = value; }
+        public string MinStockQuantity { get => minStockQuantity; set => minStockQuantity = value; }
+        public string LowStockActivity { get => lowStockActivity; set => lowStockActivity = value; }
+        public string NotifyAdminForQuantityBelow { get => notifyAdminForQuantityBelow; set => notifyAdminForQuantityBelow = value; }
+        public string BackorderMode { get => backorderMode; set => backorderMode = value; }
+        public string AllowBackInStockSubscriptions { get => allowBackInStockSubscriptions; set => allowBackInStockSubscriptions = value; }
+        public string OrderMinimumQuantity { get => orderMinimumQuantity; set => orderMinimumQuantity = value; }
+        public string OrderMaximumQuantity { get => orderMaximumQuantity; set => orderMaximumQuantity = value; }
+        public string AllowedQuantities { get => allowedQuantities; set => allowedQuantities = value; }
+        public string AllowAddingOnlyExistingAttributeCombinations { get => allowAddingOnlyExistingAttributeCombinations; set => allowAddingOnlyExistingAttributeCombinations = value; }
+        public string NotReturnable { get => notReturnable; set => notReturnable = value; }
+        public string DisableBuyButton { get => disableBuyButton; set => disableBuyButton = value; }
+        public string DisableWishlistButton { get => disableWishlistButton; set => disableWishlistButton = value; }
+        public string AvailableForPreOrder { get => availableForPreOrder; set => availableForPreOrder = value; }
+        public string PreOrderAvailabilityStartDateTimeUtc { get => preOrderAvailabilityStartDateTimeUtc; set => preOrderAvailabilityStartDateTimeUtc = value; }
+        public string CallForPrice { get => callForPrice; set => callForPrice = value; }
+        public string Price { get => price; set => price = value; }
+        public string OldPrice { get => oldPrice; set => oldPrice = value; }
+        public string ProductCost { get => productCost; set => productCost = value; }
+        public string SpecialPrice { get => specialPrice; set => specialPrice = value; }
+        public string SpecialPriceStartDateTimeUtc { get => specialPriceStartDateTimeUtc; set => specialPriceStartDateTimeUtc = value; }
+        public string SpecialPriceEndDateTimeUtc { get => specialPriceEndDateTimeUtc; set => specialPriceEndDateTimeUtc = value; }
+        public string CustomerEntersPrice { get => customerEntersPrice; set => customerEntersPrice = value; }
+        public string MinimumCustomerEnteredPrice { get => minimumCustomerEnteredPrice; set => minimumCustomerEnteredPrice = value; }
+        public string MaximumCustomerEnteredPrice { get => maximumCustomerEnteredPrice; set => maximumCustomerEnteredPrice = value; }
+        public string BasepriceEnabled { get => basepriceEnabled; set => basepriceEnabled = value; }
+        public string BasepriceAmount { get => basepriceAmount; set => basepriceAmount = value; }
+        public string BasepriceUnit { get => basepriceUnit; set => basepriceUnit = value; }
+        public string BasepriceBaseAmount { get => basepriceBaseAmount; set => basepriceBaseAmount = value; }
+        public string BasepriceBaseUnit { get => basepriceBaseUnit; set => basepriceBaseUnit = value; }
+        public string MarkAsNew { get => markAsNew; set => markAsNew = value; }
+        public string MarkAsNewStartDateTimeUtc { get => markAsNewStartDateTimeUtc; set => markAsNewStartDateTimeUtc = value; }
+        public string MarkAsNewEndDateTimeUtc { get => markAsNewEndDateTimeUtc; set => markAsNewEndDateTimeUtc = value; }
+        public string Weight { get => weight; set => weight = value; }
+        public string Length { get => length; set => length = value; }
+        public string Width { get => width; set => width = value; }
+        public string Height { get => height; set => height = value; }
+        public string Categories { get => categories; set => categories = value; }
+        public string Manufacturers { get => manufacturers; set => manufacturers = value; }
+        public string Picture1 { get => picture1; set => picture1 = value; }
+        public string Picture2 { get => picture2; set => picture2 = value; }
+        public string Picture3 { get => picture3; set => picture3 = value; }
+        public string IsFreeShipping { get => isFreeShipping; set => isFreeShipping = value; }
 
+        //set default product value
+        public void Initializer()
+        {
+            Vendor = "Bibendum";
+            ProductTemplate = "Simple product";
+            ShowOnHomePage = "FALSE";
+            AllowCustomerReviews = "TRUE";
+            Published = "TRUE";
+            IsGiftCard = "FALSE";
+            GiftCardType = "Virtual";
+            OverriddenGiftCardAmount = "0";
+            RequireOtherProducts = "FALSE";
+            AutomaticallyAddRequiredProducts = "FALSE";
+            IsDownload = "FALSE";
+            DownloadId = "0";
+            UnlimitedDownloads = "TRUE";
+            MaximumCustomerEnteredPrice = "10";
+            DownloadActivationType = " When Order Is Paid";
+            HasSampleDownload = "FALSE";
+            SampleDownloadId = "0";
+            HasUserAgreement = "FALSE";
+            IsRecurring = "FALSE";
+            RecurringCycleLength = "100";
+            RecurringCyclePeriod = "Days";
+            IsShipEnabled = "TRUE";
+            IsFreeShipping = "FALSE";
+            ShipSeparately = "FALSE";
+            AdditionalShippingCharge = "0";
+            IsTaxExempt = "FALSE";
+            TaxCategory = "GST";
+            IsTelecommunicationsOrBroadcastingOrElectronicServices = "FALSE";
+            ManageInventoryMethod = "Manage Stock";
+            UseMultipleWarehouses = "FALSE";
+            WarehouseId = "0";
+            DisplayStockQuantity = "TRUE";
+            LowStockActivity = "Nothing";
+            BackorderMode = " No Backorders";
+            AllowBackInStockSubscriptions = "FALSE";
+            OrderMaximumQuantity = "10000";
+            AllowAddingOnlyExistingAttributeCombinations = "FALSE";
+            NotReturnable = "FALSE";
+            DisableWishlistButton = "FALSE";
+            AvailableForPreOrder = "FALSE";
+            CallForPrice = "FALSE";
+            OldPrice = "0";
+            ProductCost = "0";
+            CustomerEntersPrice = "FALSE";
+            MinimumCustomerEnteredPrice = "0";
+            MaximumCustomerEnteredPrice = "1000";
+            BasepriceEnabled = "FALSE";
+            BasepriceBaseAmount = "0";
+            BasepriceBaseUnit = "bottle(s)";
+            MarkAsNew = "FALSE";
+            Weight = "1";
+            Length = "0";
+            Width = "0";
+            Height = "0";
+
+
+            
+        }
     }
 
     //these are for Bibendum objects
