@@ -19,24 +19,30 @@ namespace ReadDataFromCSVFile
         static void Main()
         {
 
-            string csv_file_path = @"F:\Project\PRODUCTS.csv";
+            string csv_file_path = @"D:\GitRepo\Data\bib_data\PRODUCTSTest.csv";
 
-            string excel_file_path_cat = @"F:\Project\categories.xlsx";
+            string excel_file_path_cat = @"D:\GitRepo\Data\bib_data\categories.xlsx";
 
-            string excel_file_path_man = @"F:\Project\manufacturers.xlsx";
+            string excel_file_path_man = @"D:\GitRepo\Data\priceboo_data\manufacturers.xlsx";
 
-            string dest_file_path_cat = @"C:\Users\justi\Downloads\category.xlsx";
+            string excel_file_path_pro = @"D:\GitRepo\Data\priceboo_data\products.xlsx";
 
-            string dest_file_path_man = @"C:\Users\justi\Downloads\manufacture.xlsx";
+            string dest_file_path_cat = @"D:\GitRepo\Data\test_data\category.xlsx";
+
+            string dest_file_path_man = @"D:\GitRepo\Data\test_data\manufacturer.xlsx";
+
+            string dest_file_path_pro = @"D:\GitRepo\Data\test_data\product.xlsx";
 
             string sheet_name_cat = @"Category";
 
             string sheet_name_man = @"Manufacturer";
 
+            string sheet_name_pro = @"Product";
+
             Dictionary<string, string> BibToPB_Product = new Dictionary<string, string>();
 
-            BibToPB_Product.Add("ProductType", "!CATEGORY"); //category = producttype + parentgroupid
-            BibToPB_Product.Add("VisibleIndividually", "!FORSALE"); // Y = TRUE, H = FALSE
+            //BibToPB_Product.Add("ProductType", "!CATEGORY"); //category = producttype + parentgroupid
+            //BibToPB_Product.Add("VisibleIndividually", "!FORSALE"); // Y = TRUE, H = FALSE
             BibToPB_Product.Add("Name", "!PRODUCT"); 
             BibToPB_Product.Add("ShortDescription", "!DESCR");
             BibToPB_Product.Add("FullDescription", "!FULLDESCR");
@@ -47,7 +53,7 @@ namespace ReadDataFromCSVFile
             BibToPB_Product.Add("StockQuantity", "!AVAIL"); 
             BibToPB_Product.Add("DisableBuyButton", "!FORSALE"); // Y =TRUE H = FALSE
             BibToPB_Product.Add("Price", "!LIST_PRICE");
-            BibToPB_Product.Add("Categories", "!REGION");
+            BibToPB_Product.Add("Region", "!REGION");
             BibToPB_Product.Add("Manufacturers", "!MANUFACTURER");
             BibToPB_Product.Add("NotifyAdminForQuantityBelow", "!LOW_AVAIL_LIMIT"); 
 
@@ -75,7 +81,9 @@ namespace ReadDataFromCSVFile
 
             //ET.ExcelWrite.TransformManufacture(csvData, excel_file_path_man,dest_file_path_man,sheet_name_man);
 
-            ET.ExcelWrite.TransformCategory(csvData, excel_file_path_cat, dest_file_path_cat, sheet_name_cat);
+            //ET.ExcelWrite.TransformCategory(csvData, excel_file_path_cat, dest_file_path_cat, sheet_name_cat);
+
+            ET.ExcelWrite.TransformProduct(csvData, excel_file_path_pro, dest_file_path_pro, sheet_name_pro, BibToPB_Product);
 
             Console.WriteLine("Program End");
 

@@ -603,6 +603,7 @@ namespace ExcelTransfomation
                 if (!attr.ContainsKey(element.Key))
                 {
                     attr.Add(element.Key, csvData.Columns[element.Value]);
+
                 }
 
             }
@@ -622,14 +623,41 @@ namespace ExcelTransfomation
                             Priceboo_Product product = d[SKU];
                             Type type = product.GetType();
                             PropertyInfo prop = type.GetProperty(element.Key);
-                            prop.SetValue(product, r[element.Value], null);
-
+                            //prop.SetValue(product, r[element.Value], null);
+                            if (r[element.Value] == DBNull.Value)
+                            {
+                                prop.SetValue(product, string.Empty, null);
+                            }
+                            else
+                            {
+                                prop.SetValue(product, r[element.Value], null);
+                            }
                         }
 
 
                     }
                     else {
                         // this product does not exist in dictionary
+                        Priceboo_Product p = new Priceboo_Product();
+                        p.Initializer();
+                        d.Add(SKU, p);
+                        foreach (var element in attr)
+                        {
+                            Priceboo_Product product = d[SKU];
+                            Type type = product.GetType();
+                            PropertyInfo prop = type.GetProperty(element.Key);
+                            Console.WriteLine(SKU+",,,"+r[element.Value]);
+                            if (r[element.Value] == DBNull.Value)
+                            {
+                                prop.SetValue(product, string.Empty, null);
+                            }
+                            else
+                            {
+                                prop.SetValue(product, r[element.Value], null);
+                            }
+                            
+
+                        }
 
                     }
 
@@ -663,6 +691,7 @@ namespace ExcelTransfomation
                 }
 
                 dt.Rows.Add(dr);
+                
 
             }
 

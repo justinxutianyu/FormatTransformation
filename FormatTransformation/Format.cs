@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NPOI.SS.Util;
 
 /// <summary>
 /// This file prepares vaious objects for the foramt transformation from Bibendum to Pricebook.
@@ -219,6 +220,19 @@ namespace Format
         private string picture2;
         private string picture3;
 
+        //specification attributes
+        private string style;
+        private string country;
+        private string region;
+        private string ingredients;
+        private string attribute;
+        private string bottlesize;
+        private string containertype;
+        private string vintage;
+
+
+       
+
         public string ProductType { get => productType; set => productType = value; }
         public string ParentGroupedProductId { get => parentGroupedProductId; set => parentGroupedProductId = value; }
         public string VisibleIndividually { get => visibleIndividually; set => visibleIndividually = value; }
@@ -315,66 +329,86 @@ namespace Format
         public string Picture3 { get => picture3; set => picture3 = value; }
         public string IsFreeShipping { get => isFreeShipping; set => isFreeShipping = value; }
 
+
+        public string Style { get => style; set => style = value; }
+        public string Country { get => country; set => country = value; }
+        public string Ingredients { get => ingredients; set => ingredients = value; }
+        public string Attribute { get => attribute; set => attribute = value; }
+        public string Bottlesize { get => bottlesize; set => bottlesize = value; }
+        public string Containertype { get => containertype; set => containertype = value; }
+        public string Vintage { get => vintage; set => vintage = value; }
+        public string Region { get => region; set => region = value; }
+
         //set default product value
         public void Initializer()
         {
+            ProductType = "Simple Product";
+            VisibleIndividually = "True";
             Vendor = "Bibendum";
             ProductTemplate = "Simple product";
-            ShowOnHomePage = "FALSE";
-            AllowCustomerReviews = "TRUE";
-            Published = "TRUE";
-            IsGiftCard = "FALSE";
+            ShowOnHomePage = "False";
+            AllowCustomerReviews = "True";
+            Published = "True";
+            IsGiftCard = "False";
             GiftCardType = "Virtual";
             OverriddenGiftCardAmount = "0";
-            RequireOtherProducts = "FALSE";
-            AutomaticallyAddRequiredProducts = "FALSE";
-            IsDownload = "FALSE";
+            RequireOtherProducts = "False";
+            AutomaticallyAddRequiredProducts = "False";
+            IsDownload = "False";
             DownloadId = "0";
-            UnlimitedDownloads = "TRUE";
+            UnlimitedDownloads = "True";
             MaximumCustomerEnteredPrice = "10";
             DownloadActivationType = " When Order Is Paid";
-            HasSampleDownload = "FALSE";
+            HasSampleDownload = "False";
             SampleDownloadId = "0";
-            HasUserAgreement = "FALSE";
-            IsRecurring = "FALSE";
+            HasUserAgreement = "False";
+            IsRecurring = "False";
             RecurringCycleLength = "100";
             RecurringCyclePeriod = "Days";
-            IsShipEnabled = "TRUE";
-            IsFreeShipping = "FALSE";
-            ShipSeparately = "FALSE";
+            IsShipEnabled = "True";
+            IsFreeShipping = "False";
+            ShipSeparately = "False";
             AdditionalShippingCharge = "0";
-            IsTaxExempt = "FALSE";
+            IsTaxExempt = "False";
             TaxCategory = "GST";
-            IsTelecommunicationsOrBroadcastingOrElectronicServices = "FALSE";
+            IsTelecommunicationsOrBroadcastingOrElectronicServices = "False";
             ManageInventoryMethod = "Manage Stock";
-            UseMultipleWarehouses = "FALSE";
+            UseMultipleWarehouses = "False";
             WarehouseId = "0";
-            DisplayStockQuantity = "TRUE";
+            DisplayStockQuantity = "True";
             LowStockActivity = "Nothing";
             BackorderMode = " No Backorders";
-            AllowBackInStockSubscriptions = "FALSE";
+            AllowBackInStockSubscriptions = "False";
             OrderMaximumQuantity = "10000";
-            AllowAddingOnlyExistingAttributeCombinations = "FALSE";
-            NotReturnable = "FALSE";
-            DisableWishlistButton = "FALSE";
-            AvailableForPreOrder = "FALSE";
-            CallForPrice = "FALSE";
+            AllowAddingOnlyExistingAttributeCombinations = "False";
+            NotReturnable = "False";
+            DisableWishlistButton = "False";
+            AvailableForPreOrder = "False";
+            CallForPrice = "False";
             OldPrice = "0";
             ProductCost = "0";
-            CustomerEntersPrice = "FALSE";
+            CustomerEntersPrice = "False";
             MinimumCustomerEnteredPrice = "0";
             MaximumCustomerEnteredPrice = "1000";
-            BasepriceEnabled = "FALSE";
+            BasepriceEnabled = "False";
             BasepriceBaseAmount = "0";
             BasepriceBaseUnit = "bottle(s)";
-            MarkAsNew = "FALSE";
+            MarkAsNew = "False";
             Weight = "1";
             Length = "0";
             Width = "0";
             Height = "0";
 
+            Categories = "Wine";
+            Style = "Red Wine";
+            Country = "Australia";
+            Region = "Barossa Valley";
+            Bottlesize = "500ml";
+            Containertype = "bottle";
+            Vintage = "2017";
 
-            
+
+
         }
     }
 
